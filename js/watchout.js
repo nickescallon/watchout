@@ -3,8 +3,9 @@ var w = 700;
 
 var enemiesCount = 30;
 var playerCount = [1];
-var enemySpeed = 700;
+var enemySpeed = 1500;
 
+var scoreDisplay = d3.select('body').append('p').html('score: 0');
 var svg = d3.select('body').append('svg')
   .attr('height', h)
   .attr('width', w);
@@ -62,7 +63,7 @@ player.on('mouseup', function(event){
 setInterval(function(){
   //enemySpeed = enemySpeed-;
   step();
-}, 1000);
+}, 1500);
 
 //Collision Detection
 
@@ -77,10 +78,14 @@ var checkCollisions = function(){
     var enemyY = this.cy.animVal.value;
     //debugger;
     //console.log(Math.abs(enemyX - playerX));
-    if (Math.abs(enemyX - playerX) < 10 && Math.abs(enemyY-playerY) < 10){
-      console.log('COLLISION!');
+    if (findDistance(playerX, playerY, enemyX, enemyY) < 21){
+      console.log('COLLISION!', playerX, playerY, enemyX, enemyY);
     }
   });
+};
+
+var findDistance = function(x1, y1, x2, y2) {
+  return Math.sqrt( (x1- x2) * (x1-x2) + (y1-y2) * (y1-y2) );
 };
 
 setInterval(function(){
