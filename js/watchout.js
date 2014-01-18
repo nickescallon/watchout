@@ -26,7 +26,7 @@ var svg = d3.select('body').append('svg')
     .attr('y',"0")
     .attr('height',"21px")
     .attr('width',"21px")
-    .attr('xlink:href', "images/Shuriken.png");
+    .attr('xlink:href', "images/shuriken.png");
 
 scoreDisplay.html('score: ' + score.toFixed(1));
 highScoreDisplay.html('high score: ' + score.toFixed(1));
@@ -44,8 +44,8 @@ var step = function(){
     .attr('cy', function(){
       return Math.random() * h;
     })
+    //.attr('fill-opacity', 0)
     .attr('fill',"url(#image)");
-    
 
   enemies.transition().duration(enemySpeed).attr('cx', function(){
       return Math.random() * w;
@@ -55,6 +55,7 @@ var step = function(){
   });
 };
 
+step();
 var player = svg.selectAll('.player').data(playerCount);
 
 player.enter()
@@ -98,6 +99,9 @@ var checkCollisions = function(){
     //console.log(Math.abs(enemyX - playerX));
     if (findDistance(playerX, playerY, enemyX, enemyY) < 21){
       //console.log('COLLISION!', playerX, playerY, enemyX, enemyY);
+      d3.select('.player').attr('fill', 'red')
+        .transition().duration(1000).attr('fill', 'blue');
+
       if (score > highScore){
         highScore = score;
         highScoreDisplay.html('high score: ' + score.toFixed(1));

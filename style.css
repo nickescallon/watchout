@@ -10,8 +10,15 @@
 }
 image {
     -webkit-animation-name:             rotate; 
-    -webkit-animation-duration:         .01s; 
+    -webkit-animation-duration:         .2s; 
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function: linear;
 }
-  
+
+.enemey{
+  z-index: -999;
+}
+
+.player {
+  z-index: 999;
+}
