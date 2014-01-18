@@ -1,0 +1,17 @@
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+    -webkit-transform-origin: 50% 50% 0;
+  }
+  to { 
+    -webkit-transform: rotate(360deg);
+    -webkit-transform-origin: 50% 50% 0;
+  }
+}
+image {
+    -webkit-animation-name:             rotate; 
+    -webkit-animation-duration:         .01s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+}
+  
