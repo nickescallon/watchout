@@ -13,6 +13,21 @@ var svg = d3.select('body').append('svg')
   .attr('height', h)
   .attr('width', w);
 
+  svg.append('pattern')
+    .attr('id', 'image')
+    .attr('x', "0")
+    .attr('y',"0")
+    .attr('patternUnits', 'objectBoundingBox')
+    .attr('height',"21px")
+    .attr('width',"21px");
+
+  svg.select('pattern').append('image')
+    .attr('x', "0")
+    .attr('y',"0")
+    .attr('height',"21px")
+    .attr('width',"21px")
+    .attr('xlink:href', "images/Shuriken.png");
+
 scoreDisplay.html('score: ' + score.toFixed(1));
 highScoreDisplay.html('high score: ' + score.toFixed(1));
 
@@ -29,8 +44,8 @@ var step = function(){
     .attr('cy', function(){
       return Math.random() * h;
     })
-    .attr('fill', 'black');
-
+    .attr('fill',"url(#image)");
+    
 
   enemies.transition().duration(enemySpeed).attr('cx', function(){
       return Math.random() * w;
