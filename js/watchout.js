@@ -4,14 +4,17 @@ var w = 700;
 var enemiesCount = 30;
 var playerCount = [1];
 var enemySpeed = 1500;
+var score = 0;
+var highScore = 0;
 
-var scoreDisplay = d3.select('body').append('p').html('score: 0');
+var scoreDisplay = d3.select('body').append('p');
+var highScoreDisplay = d3.select('body').append('p');
 var svg = d3.select('body').append('svg')
   .attr('height', h)
   .attr('width', w);
 
-
-
+scoreDisplay.html('score: ' + score.toFixed(1));
+highScoreDisplay.html('high score: ' + score.toFixed(1));
 
 var step = function(){
   var enemies = svg.selectAll('.enemy').data(d3.range(enemiesCount));
@@ -79,7 +82,13 @@ var checkCollisions = function(){
     //debugger;
     //console.log(Math.abs(enemyX - playerX));
     if (findDistance(playerX, playerY, enemyX, enemyY) < 21){
-      console.log('COLLISION!', playerX, playerY, enemyX, enemyY);
+      //console.log('COLLISION!', playerX, playerY, enemyX, enemyY);
+      if (score > highScore){
+        highScore = score;
+        highScoreDisplay.html('high score: ' + score.toFixed(1));
+      }
+      score = 0;
+      scoreDisplay.html('score: ' + score.toFixed(1));
     }
   });
 };
@@ -92,11 +101,15 @@ setInterval(function(){
   checkCollisions();
 }, 10);
 
+setInterval(function(){
+  score += .1;
+  scoreDisplay.html('score: ' + score.toFixed(1));
+  if (highScore < score){
+    highScore = score;
+    highScoreDisplay.html('high score: ' + score.toFixed(1));
+  }
+}, 100);
 
-
-//playerX === enemyX && playerY === enemyY
-
-//Math.abs(enemyX - playerX) < 5 && Math.abs(enemyY-playerY) < 5
 
 
 
