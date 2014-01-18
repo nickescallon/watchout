@@ -26,7 +26,7 @@ var svg = d3.select('body').append('svg')
     .attr('y',"0")
     .attr('height',"21px")
     .attr('width',"21px")
-    .attr('xlink:href', "images/shuriken.png");
+    .attr('xlink:href', "images/shuriken_2.png");
 
 scoreDisplay.html('score: ' + score.toFixed(1));
 highScoreDisplay.html('high score: ' + score.toFixed(1));
@@ -55,7 +55,6 @@ var step = function(){
   });
 };
 
-step();
 var player = svg.selectAll('.player').data(playerCount);
 
 player.enter()
@@ -65,6 +64,8 @@ player.enter()
   .attr('cx', w/2)
   .attr('cy', h/2)
   .attr('fill', 'blue');
+
+  step();
 
 
 player.on('mousedown', function(event){
